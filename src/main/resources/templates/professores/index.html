@@ -28,17 +28,21 @@
               </tr>
               </thead>
               <tbody>
-                <tr>
-                  <th class="col-1"></th>
-                  <th class="col-4"></th>
-                  <th class="col-2"></th>
-                  <th class="col-2"></th>
-                  <th class="col-1></th>
-                  <th class="col-1></th>
+                <tr th:each="professor : ${Professores}">
+                  <th class="col-1" scope="row" th:text="${professor.getId()}">ID</th>
+                  <th class="col-4" th:text="${professor.nome}">Nome do professor</th>
+                  <th class="col-2" th:text="${professor.salario}">Salário</th>
+                  <th class="col-2" th:text="${professor.statusProfessor.toString()}">Status</th>
+                  <th class="col-1"><a href="#">Detalhes</a></th>
+                  <th class="col-1"><a href="#">Editar</a></th>
+                  <th class="col-1"><a href="#">Deletar</a></th>
                 </tr>
               </tbody>
             </table>
         </div>
+    </div>
+    <div class="row">
+      <a href="/professor/new">Novo Professor</a>
     </div>
   </div>
 

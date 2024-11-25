@@ -20,6 +20,12 @@ public class Professor {
     public Professor() {
     }
 
+    public Professor(String nome, BigDecimal salario, EStatusProfessor statusProfessor) {
+        this.nome = nome;
+        this.salario = salario;
+        this.statusProfessor = statusProfessor;
+    }
+
     public long getId() {
         return id;
     }
@@ -50,5 +56,15 @@ public class Professor {
 
     public void setStatusProfessor(EStatusProfessor statusProfessor) {
         this.statusProfessor = statusProfessor;
+    }
+
+    @Override
+    public String toString() {
+        return "Professor{" +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
+                ", salario=" + salario +
+                ", statusProfessor=" + statusProfessor +
+                '}';
     }
 }
