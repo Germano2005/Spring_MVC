@@ -32,8 +32,8 @@ public class ProfessorController {
         return mv;
     }
 
-    @GetMapping("/professor/new")
-    public ModelAndView novo(){
+    @GetMapping("/professores/new")
+    public ModelAndView novo(RequisicaoNovoProfessor requisicao){
         ModelAndView mv = new ModelAndView("/professores/new");
         mv.addObject("statusProfessor", EStatusProfessor.values());
 
@@ -41,15 +41,17 @@ public class ProfessorController {
     }
 
     @PostMapping("/professores") // ao invés de ser GET usamos o POST por se tratar de dados sensíveis que não podem ser passados na URL
-    public String create(@Valid RequisicaoNovoProfessor requisicao, BindingResult bindingResult){
+    public ModelAndView create(@Valid RequisicaoNovoProfessor requisicao, BindingResult bindingResult){
         System.out.println("\n ***************************TEM ERROS*******************");
         if (bindingResult.hasErrors()){
-            return "redirect:/professores/new";
+            ModelAndView mv = new ModelAndView("/professores/new");
+            mv.addObject("statusProfessor", EStatusProfessor.values());
+            return mv;
         }
         else {
             Professor professor = requisicao.toProfessor();
             this.professorRepository.save(professor); // inserindo um novo professor na base de dados
-            return "redirect:/professores";
+            return new ModelAndView("redirect:/professores");
         }
 
     }

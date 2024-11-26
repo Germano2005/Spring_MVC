@@ -1,17 +1,8 @@
 <!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-
-    <title>Novo Professor</title>
-</head>
+<head th:replace="~{fragmentos :: head('Novo Professor')}">
 <body>
+<header th:replace="~{fragmentos :: header(titulo)}"></header>
 <div class="conteiner">
     <div class="row">
         <h1>Novo Professor</h1>
@@ -19,20 +10,20 @@
 
     <div class="conteiner">
       <div class="row">
-        <form action="/professores" method="post">
+        <form th:object="${requisicaoNovoProfessor}" action="/professores" method="post">
           <div class="mb-3">
             <label class="form-label">Nome do Professor</label>
-            <input type="text" class="form-control" name="nome"> <!--O name deve ser o mesmo nome que o atributo da classe-->
-            <div></div>
+            <input type="text" th:errorclass="is-invalid" class="form-control " th:field="*{nome}" > <!--O name deve ser o mesmo nome que o atributo da classe-->
+            <div class="invalid-feedback" th:errors="*{nome}"></div>
           </div>
           <div class="mb-3">
             <label class="form-label">Salário</label>
-            <input type="text" class="form-control" name="salario">
-            <div></div>
+            <input type="text" th:errorclass="is-invalid" class="form-control" th:field="*{salario}">
+            <div class="invalid-feedback" th:errors="*{salario}"></div>
           </div>
           <div class="mb-3">
             <label class="form-label">Status</label>
-            <select class="form-select" name="statusProfessor">
+            <select class="form-select" th:field="*{statusProfessor}">
              <option th:each="status : ${statusProfessor}"
                  th:value="${status}" th:text="${status}"></option>
        </select>

@@ -2,17 +2,21 @@ package com.germanomvc.registroweb.dto;
 
 import com.germanomvc.registroweb.models.EStatusProfessor;
 import com.germanomvc.registroweb.models.Professor;
+import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import org.springframework.lang.NonNull;
 
 import java.math.BigDecimal;
 
 // é uma classe DTO (DATA TRANSFER OBJECT)
 public class RequisicaoNovoProfessor {
-    @NonNull
+
     @NotBlank
-    private String nome;
-    @NotBlank
+    @NotNull
+    private String nome; // em caso de erro, NotBlank, requisicaoNovoProfessor.nome
+    @NotNull
+    @DecimalMin("0.0")
     private BigDecimal salario;
     private EStatusProfessor statusProfessor;
 
